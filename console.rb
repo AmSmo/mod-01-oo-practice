@@ -9,8 +9,6 @@ martha = Patient.new("Martha",33)
 prince = Patient.new("Formerly Known as", 45)
 
 
-(name, specialty, years = 1)
-
 nick = Doctor.new("Nick Riviera", "fraud", 3)
 
 hibbert = Doctor.new("Julius Michael Hibbert", "Family Medicine", 8)
