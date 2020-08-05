@@ -26,9 +26,17 @@ class Doctor
 
     def greet
         puts "Hi Everybody! I'm Dr. #{self.name}."
-        puts "Hi Dr. Nick!!!" if self.name == "Nick Riviera"
-        puts "Hehehehe" if self.name == "Julius Michael Hibbert"
-        puts "The first tenet of good medicine is, never make the patient any worse.... Wesley" if self.name =="Beverly Crusher"
+        # puts "Hi Dr. Nick!!!" if self.name == "Nick Riviera"
+        # puts "Hehehehe" if self.name == "Julius Michael Hibbert"
+        # puts "The first tenet of good medicine is, never make the patient any worse.... Wesley" if self.name =="Beverly Crusher"
+
+        # just practicing self vs @ .. don't mind me
+        case self.name
+        when "Nick Riviera" then puts "Hi Dr. Nick!!!"
+        when "Julius Michael Hibbert" then puts "Hehehehe"
+        when "Beverly Crusher" then "The first tenet of good medicine is, never make the patient any worse.... Wesley"
+        else puts "Well... I am a doctor"
+        end
     end
 
 end
