@@ -14,7 +14,6 @@ class Doctor
 
             doc.specialty.downcase == specialty.downcase  
         end
-        # this returns doctor objects, was unclear if you wanted names
     end
 
     def initialize(name, specialty, years = 1)
@@ -26,17 +25,59 @@ class Doctor
 
     def greet
         puts "Hi Everybody! I'm Dr. #{self.name}."
-        
-        # puts "Hi Dr. Nick!!!" if self.name == "Nick Riviera"
-        # puts "Hehehehe" if self.name == "Julius Michael Hibbert"
-        # puts "The first tenet of good medicine is, never make the patient any worse.... Wesley" if self.name =="Beverly Crusher"
-
-        # just practicing self vs @ and case.. don't mind me 
         case self.name
-        when "Nick Riviera" then puts "Hi Dr. Nick!!!"
-        when "Julius Michael Hibbert" then puts "Hehehehe"
-        when "Beverly Crusher" then "The first tenet of good medicine is, never make the patient any worse.... Wesley"
-        else puts "Well... I am a doctor"
+            when "Nick Riviera" then puts "Hi Dr. Nick!!!"
+            when "Julius Michael Hibbert" then puts "Hehehehe"
+            when "Beverly Crusher" then "The first tenet of good medicine is, never make the patient any worse.... Wesley"
+            else puts "Well... I am a doctor"
+        end
+    end
+
+    def patients
+        Patient.all.select {|patient| patient.doctor == self}
+    end
+
+    def my_patient?(patient)
+        self.patients.include?(patient)
+    end
+
+    def other_doc(patient)
+       
+        if patient.doctor.nil?
+            return "That's not anyone's patient"
+        else
+            return "You're Dr. #{patient.doctor.name}'s patient.'"
+        end
+    end
+
+    def discharge_patient(patient)
+        if my_patient?(patient)
+            patient.doctor = nil
+            return "You are no longer in the care of Dr. #{self.name}"
+        else
+            other_doc(patient)
+        end
+    end
+
+    # def doctor?(doctor)
+    #     doctor.class == Doctor
+    # end
+
+    # realized that this doesn't work as a function since if they aren't a
+    # doctor class, this function wouldn't exist.  Instead of a lot of &&
+    # statements is there a better way of going about checking? or 
+    # is this a waste of time (sorry if it is your time)
+
+
+    def transfer_patient(patient, new_doctor)
+        if patient.class == Patient && new_doctor.class == Doctor
+            if my_patient?(patient) 
+                patient.change_doctors(new_doctor)
+            else
+                other_doc(patient)
+            end
+        else
+            return "One of you is not who you say you are"
         end
     end
 

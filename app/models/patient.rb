@@ -1,5 +1,6 @@
 class Patient
-    attr_accessor :name, :age
+    attr_accessor :name, :age, :doctor
+    
 
     @@all = []
 
@@ -7,23 +8,29 @@ class Patient
         @@all
     end
 
-    def initialize(name, age)
+    def initialize(name, age, doctor = nil)
         @name = name
         @age = age
         @impatience = 0   #I hope the pun is intended
+        @doctor = doctor
         @@all << self    
     end
 
-    def inquire_appt_ready
+    # unsure if you wanted us to change the initialization so you can now
+    # create a patient automatically with a doctor.  It's still an optional
+    # argument though
 
+    def inquire_appt_ready
         increase_impatience
         return "The doctor will be ready soon. Please be patient"  
-
-        # do you care about order/ puts vs return? was wondering if the return of what 
-        # what impatience changes to would be a negative feature later.
-        # I really need to practice caution with implicit returns since I started with python
-        # any advice would be awesome!!!! Is it alright to keep the practice of using 'return'
-        
+    end
+    
+    def change_doctors(new_doc)
+        if new_doc.class == Doctor
+            @doctor = new_doc
+        else
+            return "That's not a doctor, that's three children stacked up in a labcoat"
+        end
     end
 
 

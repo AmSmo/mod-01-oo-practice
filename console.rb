@@ -6,7 +6,6 @@ alan = Patient.new("Al", 27)
 
 martha = Patient.new("Martha",33)
 
-prince = Patient.new("Formerly Known as", 45)
 
 
 nick = Doctor.new("Nick Riviera", "fraud", 3)
@@ -17,4 +16,5 @@ crusher = Doctor.new("Beverly Crusher", "Family Medicine", 300)
 
 fauci = Doctor.new("Anthony Fauci", "hero", 33)
 
+prince = Patient.new("Formerly Known as", 45, fauci)
 binding.pry
