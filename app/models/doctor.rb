@@ -33,52 +33,66 @@ class Doctor
         end
     end
 
+    def appointments
+        Appointment.all.select {|app| app.doctor == self}
+    end
+
     def patients
-        Patient.all.select {|patient| patient.doctor == self}
+        (appointments.map {|app| app.patient}).uniq
     end
 
-    def my_patient?(patient)
-        self.patients.include?(patient)
+    def create_appointment(patient)
+        Appointment.new(self,patient)
     end
+    
 
-    def other_doc(patient)
-       
-        if patient.doctor.nil?
-            return "That's not anyone's patient"
-        else
-            return "You're Dr. #{patient.doctor.name}'s patient.'"
-        end
-    end
-
-    def discharge_patient(patient)
-        if my_patient?(patient)
-            patient.doctor = nil
-            return "You are no longer in the care of Dr. #{self.name}"
-        else
-            other_doc(patient)
-        end
-    end
-
-    # def doctor?(doctor)
-    #     doctor.class == Doctor
-    # end
-
-    # realized that this doesn't work as a function since if they aren't a
-    # doctor class, this function wouldn't exist.  Instead of a lot of &&
-    # statements is there a better way of going about checking? or 
-    # is this a waste of time (sorry if it is your time)
-
-
-    def transfer_patient(patient, new_doctor)
-        if patient.class == Patient && new_doctor.class == Doctor
-            if my_patient?(patient) 
-                patient.change_doctors(new_doctor)
-            else
-                other_doc(patient)
-            end
-        else
-            return "One of you is not who you say you are"
-        end
-    end
-
+    
+    
 end
+
+
+
+
+########### GRAVEYARD ############## For reference only
+# def other_doc(patient)
+
+#     if patient.doctor.nil?
+#         return "That's not anyone's patient"
+#     else
+#         return "You're Dr. #{patient.doctor.name}'s patient.'"
+#     end
+# end
+# def my_patient?(patient)
+#     self.patients.include?(patient)
+# end
+
+# def discharge_patient(patient)
+#     if my_patient?(patient)
+#         patient.doctor = nil
+#         return "You are no longer in the care of Dr. #{self.name}"
+#     else
+#         other_doc(patient)
+#     end
+# end
+
+# def doctor?(doctor)
+#     doctor.class == Doctor
+# end
+
+# realized that this doesn't work as a function since if they aren't a
+# doctor class, this function wouldn't exist.  Instead of a lot of &&
+# statements is there a better way of going about checking? or 
+# is this a waste of time (sorry if it is your time)
+
+
+# def transfer_patient(patient, new_doctor)
+#     if patient.class == Patient && new_doctor.class == Doctor
+#         if my_patient?(patient) 
+#             patient.change_doctors(new_doctor)
+#         else
+#             other_doc(patient)
+#         end
+#     else
+#         return "One of you is not who you say you are"
+#     end
+# end

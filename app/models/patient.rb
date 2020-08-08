@@ -1,5 +1,5 @@
 class Patient
-    attr_accessor :name, :age, :doctor
+    attr_accessor :name, :age
     
 
     @@all = []
@@ -8,35 +8,44 @@ class Patient
         @@all
     end
 
-    def initialize(name, age, doctor = nil)
+    def initialize(name, age)
         @name = name
         @age = age
-        @impatience = 0   #I hope the pun is intended
-        @doctor = doctor
+        @impatience = 0   
         @@all << self    
     end
 
-    # unsure if you wanted us to change the initialization so you can now
-    # create a patient automatically with a doctor.  It's still an optional
-    # argument though
 
     def inquire_appt_ready
         increase_impatience
         return "The doctor will be ready soon. Please be patient"  
     end
-    
-    def change_doctors(new_doc)
-        if new_doc.class == Doctor
-            @doctor = new_doc
-        else
-            return "That's not a doctor, that's three children stacked up in a labcoat"
-        end
+   
+    def appointments
+        Appointment.all.select {|app| app.patient == self}
     end
 
+    def doctors
+        appointments.map {|app| app.doctor}.uniq
+    end
+
+    def create_appointment(doctor)
+        Appointment.new(doctor,self)
+    end
 
     private
-
+    
     def increase_impatience
         @impatience +=1
     end
 end
+
+########## GRAVEYARD ############## For reference only
+
+# def change_doctors(new_doc)
+#     if new_doc.class == Doctor
+#         @doctor = new_doc
+#     else
+#         return "That's not a doctor, that's three children stacked up in a labcoat"
+#     end
+# end

@@ -48,3 +48,41 @@ Doctor#patients should return an array of all the Patients for that doctor
 Doctor#dischange_patient should set a patient’s doctor to nil, only if the patient belongs to the current doctor
 Doctor#transfer_patient should change a patient’s doctor to another doctor. This should only work if the patient belongs to the current doctor.
 (edited)
+
+
+
+
+A Patient has many Doctors through Appointment
+X
+A Doctor has many Patients through Appointment
+X
+
+
+An Appointment belongs to a Doctor and a Patient
+Appointment
+X
+Appointment#initialize… intentionally vague. What will it need to be initialized?
+X maybe add time later?
+Appointment.all should return a list of all appointment instances 
+X
+Patient
+Note: you can comment out your #doctor and #changes_doctors methods
+X
+Patient#appointments should return a list of Appointment instances associated with this patient 
+X
+Patient#doctors should return a list of Doctor instances associated with this patient through Appointments. Try to ensure this list does not include duplicates.
+X
+
+Patient#create_appointment should create a new appointment between the current patient and a specified doctor
+X
+Doctor
+Note: you can comment out your #patients, #dischange_patient, and #transfer_patient methods
+X
+Doctor#appointments should return a list of Appointment instances associated with this doctor 
+X
+Doctor#patients should return a list of Patient instances associated with this patient through Appointments. Try to ensure this list does not include duplicates.
+X
+
+
+
+
