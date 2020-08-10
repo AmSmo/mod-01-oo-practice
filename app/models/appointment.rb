@@ -18,6 +18,7 @@ class Appointment
     # hesitant to do things like that without knowing
     # how far we are going with deliverables
     # but HELLO! hope you're having a wonderful day
+    # FROM CARYN: Hi Adam! Thank you <3 Go for date whenever you're ready! Google it!!
 
 
 end
